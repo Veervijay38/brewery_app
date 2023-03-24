@@ -1,20 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import StackScreens from "./src/navigator/StackNavigation";
+import { NavigationContainer } from "@react-navigation/native";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-export default function App() {
+import { registerRootComponent } from "expo";
+
+const querryClient = new QueryClient();
+
+// App entry point----
+function BreweryApp() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <QueryClientProvider client={querryClient}>
+      <NavigationContainer>
+        <StackScreens />
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+registerRootComponent(BreweryApp);
+export default BreweryApp;
